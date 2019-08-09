@@ -20892,7 +20892,7 @@ S .root (_ => {
 		var to_height = to_y_1 - to_y_0
 
 		var context = canvas .getContext ('2d')
-		;context .scale (window .devicePixelRatio, window .devicePixelRatio)
+//		;context .scale (1 / window .devicePixelRatio, 1 / window .devicePixelRatio)
 		if (not (L_ .isDefined (preview))) {
 			;context .fillStyle = 'rgb(232,232,232)'
 			;context .fillRect (to_x_0, to_y_0, to_width, to_height) }
@@ -20908,7 +20908,7 @@ S .root (_ => {
 			var tiles = mark (tiles_state)
 
 			var context = canvas .getContext ('2d')
-			;context .scale (window .devicePixelRatio, window .devicePixelRatio)
+//			;context .scale (1 / window .devicePixelRatio, 1 / window .devicePixelRatio)
 			;pin (
 			[ L .elems, L .choose (name =>
 			[ K (tiles [name]), L .when (I), img => {
@@ -20929,7 +20929,7 @@ S .root (_ => {
 	;canvas .addEventListener (touch, e => {
 		if (not (L_ .isDefined (show (zooming_state)))) {
 			var { left, top } = canvas .getBoundingClientRect ()
-			var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ e .clientX - left, e .clientY - top ]))
+			var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ (e .clientX - left) * window .devicePixelRatio, (e .clientY - top) * window .devicePixelRatio ]))
 			if (L_ .isDefined (show (topic_state))) {
 				if (L_ .isDefined (_topic) && not (equals (_topic) (show (topic_state))) ) {
 					;please (L_ .set (_topic)) (topic_state) }
@@ -20954,7 +20954,7 @@ S .root (_ => {
 
 	;canvas .addEventListener ('mousemove', e => {
 		var { left, top } = canvas .getBoundingClientRect ()
-		var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ e .clientX - left, e .clientY - top ]))
+		var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ (e .clientX - left) * window .devicePixelRatio, (e .clientY - top) * window .devicePixelRatio ]))
 		if (L_ .isDefined (_topic)) {
 			;canvas .style .cursor = 'pointer' }
 		else {
