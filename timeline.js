@@ -20892,7 +20892,6 @@ S .root (_ => {
 		var to_height = to_y_1 - to_y_0
 
 		var context = canvas .getContext ('2d')
-//		;context .scale (1 / window .devicePixelRatio, 1 / window .devicePixelRatio)
 		if (not (L_ .isDefined (preview))) {
 			;context .fillStyle = 'rgb(232,232,232)'
 			;context .fillRect (to_x_0, to_y_0, to_width, to_height) }
@@ -20908,7 +20907,6 @@ S .root (_ => {
 			var tiles = mark (tiles_state)
 
 			var context = canvas .getContext ('2d')
-//			;context .scale (1 / window .devicePixelRatio, 1 / window .devicePixelRatio)
 			;pin (
 			[ L .elems, L .choose (name =>
 			[ K (tiles [name]), L .when (I), img => {
