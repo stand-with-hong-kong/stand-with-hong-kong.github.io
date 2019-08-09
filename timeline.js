@@ -20938,7 +20938,7 @@ S .root (_ => {
 	;canvas .addEventListener (touch, e => {
 		if (not (L_ .isDefined (show (zooming_state)))) {
 			var { left, top } = canvas .getBoundingClientRect ()
-			var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ (e .clientX - left) * window .devicePixelRatio, (e .clientY - top) * window .devicePixelRatio ]))
+			var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ (e .pageX - left) * window .devicePixelRatio, (e .pageY - top) * window .devicePixelRatio ]))
 			if (L_ .isDefined (show (topic_state))) {
 				if (L_ .isDefined (_topic) && not (equals (_topic) (show (topic_state))) ) {
 					;please (L_ .set (_topic)) (topic_state) }
@@ -20963,7 +20963,7 @@ S .root (_ => {
 
 	;canvas .addEventListener ('mousemove', e => {
 		var { left, top } = canvas .getBoundingClientRect ()
-		var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ (e .clientX - left) * window .devicePixelRatio, (e .clientY - top) * window .devicePixelRatio ]))
+		var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ (e .pageX - left) * window .devicePixelRatio, (e .pageY - top) * window .devicePixelRatio ]))
 		if (L_ .isDefined (_topic)) {
 			;canvas .style .cursor = 'pointer' }
 		else {
