@@ -20755,8 +20755,8 @@ suppose (
 
 	, scale: 100
 	, scroll: 0
-	, width: window .innerWidth
-	, height: window .innerHeight
+	, width: window .innerWidth * window .devicePixelRatio
+	, height: window .innerHeight * window .devicePixelRatio
 
 	, previews_queue: [ ... preview_details ]
 	, tiles_queue: [ ... rectangle_tiles_ ([ 0, 0, timeline_width, timeline_height ]) ]
@@ -20873,7 +20873,7 @@ S .root (_ => {
 			.then (R .tap (img => S .freeze (_ => {
 				;please (R .reject (equals (name))) (tiles_queue_state)
 				;please (L .set (name) (img)) (tiles_state) } ) ) )
-			.then (_ => {
+			.catch (_ => {
 				;delete tile_loads [name]
 				;setTimeout (_ => {
 					;load_tile (name) } , 500) } ) } }
@@ -20881,8 +20881,8 @@ S .root (_ => {
 	var reset_canvas = ([ x_0, y_0, x_1, y_1 ]) => {
 		;canvas .width = x_1 - x_0
 		;canvas .height = y_1 - y_0 
-		;canvas .style .width = x_1 - x_0
-		;canvas .style .height = y_1 - y_0 }
+		;canvas .style .width = (x_1 - x_0) / window .devicePixelRatio
+		;canvas .style .height = (y_1 - y_0) / window .devicePixelRatio }
 
 	var draw_preview = ([ from_x_0, from_y_0, from_x_1, from_y_1 ]) => ([ to_x_0, to_y_0, to_x_1, to_y_1 ]) => {
 		var preview = mark (preview_state)
@@ -20892,6 +20892,7 @@ S .root (_ => {
 		var to_height = to_y_1 - to_y_0
 
 		var context = canvas .getContext ('2d')
+		;context .scale (window .devicePixelRatio, window .devicePixelRatio)
 		if (not (L_ .isDefined (preview))) {
 			;context .fillStyle = 'rgb(232,232,232)'
 			;context .fillRect (to_x_0, to_y_0, to_width, to_height) }
@@ -20907,6 +20908,7 @@ S .root (_ => {
 			var tiles = mark (tiles_state)
 
 			var context = canvas .getContext ('2d')
+			;context .scale (window .devicePixelRatio, window .devicePixelRatio)
 			;pin (
 			[ L .elems, L .choose (name =>
 			[ K (tiles [name]), L .when (I), img => {
@@ -20919,8 +20921,8 @@ S .root (_ => {
 			) (rectangle_tiles_ ([ from_x_0, from_y_0, from_x_1, from_y_1 ]) ) } }
 
 	;window .addEventListener ('resize', _ => {;S .freeze (_ => {
-		;please (L_ .set (window .innerWidth)) (width_state)
-		;please (L_ .set (window .innerHeight)) (height_state) 
+		;please (L_ .set (window .innerWidth * window .devicePixelRatio)) (width_state)
+		;please (L_ .set (window .innerHeight * window .devicePixelRatio)) (height_state) 
 		} ) } )
 
 	var touch = pinpoint ([ L .elems, L .when (event => L .isDefined ('on' + event) (window)) ]) ([ 'mousedown', 'touchstart' ])
