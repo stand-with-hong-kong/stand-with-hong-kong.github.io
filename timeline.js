@@ -20850,9 +20850,10 @@ S .root (_ => {
 			;preview_loads [name]
 			= (new Promise ((resolve, reject) => {
 				var _preview = new Image
-				;_preview .onload = _ => {;resolve (_preview)}
-				;_preview .onerror = err => {;reject (err)}
-				;_preview .src = 'imgs/' + name + '.png' } ) )
+				;_preview .src = 'imgs/' + name + '.png'
+				;_preview .decode ()
+				.then (_ => {;resolve (_preview)})
+				.catch (err => {;reject (err)}) } ) )
 			.then (R .tap (img => S .freeze (_ => {
 				;please (R .reject (equals ({ name, scale }))) (previews_queue_state)
 				;please (L_ .set ({ img, scale })) (preview_state) } ) ) )
@@ -20867,9 +20868,10 @@ S .root (_ => {
 			;tile_loads [name]
 			= (new Promise ((resolve, reject) => {
 				var _tile = new Image
-				;_tile .onload = _ => {;resolve (_tile)}
-				;_tile .onerror = err => {;reject (err)}
-				;_tile .src = 'imgs/tile_' + name + '.png' } ) )
+				;_tile .src = 'imgs/tile_' + name + '.png' 
+				;_tile .decode ()
+				.then (_ => {;resolve (_preview)})
+				.catch (err => {;reject (err)}) } ) )
 			.then (R .tap (img => S .freeze (_ => {
 				;please (R .reject (equals (name))) (tiles_queue_state)
 				;please (L .set (name) (img)) (tiles_state) } ) ) )
