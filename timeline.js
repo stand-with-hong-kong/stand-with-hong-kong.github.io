@@ -20934,8 +20934,7 @@ S .root (_ => {
 		;please (L_ .set (window .innerHeight * window .devicePixelRatio)) (height_state) 
 		} ) } )
 
-	var touch = pinpoint ([ L .elems, L .when (event => L .isDefined ('on' + event) (window)) ]) ([ 'touchend', 'mousedown' ])
-	;canvas .addEventListener (touch, e => {
+	;canvas .addEventListener ('click', e => {
 		if (not (L_ .isDefined (show (zooming_state)))) {
 			var _topic = point_topic (change_coords (S .sample (target_rectangle_)) (S .sample (focus_rectangle_)) ([ e .pageX * window .devicePixelRatio, e .pageY * window .devicePixelRatio ]))
 			if (L_ .isDefined (show (topic_state))) {
