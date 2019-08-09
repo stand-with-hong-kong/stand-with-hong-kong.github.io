@@ -20934,7 +20934,7 @@ S .root (_ => {
 		;please (L_ .set (window .innerHeight * window .devicePixelRatio)) (height_state) 
 		} ) } )
 
-	var touch = pinpoint ([ L .elems, L .when (event => L .isDefined ('on' + event) (window)) ]) ([ 'mousedown', 'touchstart' ])
+	var touch = pinpoint ([ L .elems, L .when (event => L .isDefined ('on' + event) (window)) ]) ([ 'touchstart', 'mousedown' ])
 	;canvas .addEventListener (touch, e => {
 		if (not (L_ .isDefined (show (zooming_state)))) {
 			var { left, top } = canvas .getBoundingClientRect ()
