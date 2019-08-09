@@ -20870,7 +20870,7 @@ S .root (_ => {
 				var _tile = new Image
 				;_tile .src = 'imgs/tile_' + name + '.png' 
 				;_tile .decode ()
-				.then (_ => {;resolve (_preview)})
+				.then (_ => {;resolve (_tile)})
 				.catch (err => {;reject (err)}) } ) )
 			.then (R .tap (img => S .freeze (_ => {
 				;please (R .reject (equals (name))) (tiles_queue_state)
