@@ -20918,6 +20918,15 @@ S .root (_ => {
 					, tile_to_x_0, tile_to_y_0, tile_to_size, tile_to_size ) } ] ) ]
 			) (rectangle_tiles_ ([ from_x_0, from_y_0, from_x_1, from_y_1 ]) ) } }
 
+	;document .addEventListener ('touchmove', event => {
+		  if (event .scale !== 1) {;event .preventDefault ()} }, false )
+
+	var last_touchend = 0
+	;document .addEventListener ('touchend', event => {
+		  var now = (new Date) .getTime ()
+		  if (now - last_touchend <= 300) {;event .preventDefault ()}
+		  ;last_touchend = now }, false )
+
 	;window .addEventListener ('resize', _ => {;S .freeze (_ => {
 		;please (L_ .set (window .innerWidth * window .devicePixelRatio)) (width_state)
 		;please (L_ .set (window .innerHeight * window .devicePixelRatio)) (height_state) 
