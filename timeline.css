@@ -10,6 +10,11 @@ body page {
   width: 100vw;
   height: 100vh;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body page::-webkit-scrollbar {
+  display: none;
 }
 body page canvas {
   position: absolute;
